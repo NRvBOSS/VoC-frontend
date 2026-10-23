@@ -63,7 +63,7 @@ function validate(v: Values): Errors {
 }
 
 const inputBase =
-  "mt-1 block w-full rounded-lg border bg-white px-3 py-2 text-sm text-slate-900 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600";
+  "mt-1 block w-full rounded-lg border bg-white px-3 py-2 text-sm text-slate-900 placeholder:text-slate-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600";
 
 function inputClass(hasError: boolean) {
   return `${inputBase} ${hasError ? "border-red-600" : "border-slate-300"}`;
@@ -112,7 +112,6 @@ export default function ReportForm() {
         Diqqət: göndərmə hələ qoşulmayıb. Forma yoxlanılır, lakin heç bir
         məlumat göndərilmir və ya saxlanılmır.
       </p>
-
       <div>
         <label
           htmlFor="report-category"
@@ -144,7 +143,6 @@ export default function ReportForm() {
         </select>
         <FieldError id="report-category-error" message={errors.category} />
       </div>
-
       <div>
         <label
           htmlFor="report-title"
@@ -169,7 +167,6 @@ export default function ReportForm() {
         />
         <FieldError id="report-title-error" message={errors.title} />
       </div>
-
       <div>
         <label
           htmlFor="report-description"
@@ -204,7 +201,6 @@ export default function ReportForm() {
           </p>
         </div>
       </div>
-
       <div role="group" aria-labelledby="report-location-label">
         <p
           id="report-location-label"
@@ -250,7 +246,6 @@ export default function ReportForm() {
         </div>
         <FieldError id="report-location-error" message={errors.location} />
       </div>
-
       {checked && (
         <p
           role="status"
@@ -260,8 +255,9 @@ export default function ReportForm() {
           məlumat göndərilmədi və saxlanılmadı.
         </p>
       )}
-
-      <Button type="submit">Göndər</Button>
+      <Button type="submit" className="w-full sm:w-auto">
+        Göndər
+      </Button>{" "}
     </form>
   );
 }
