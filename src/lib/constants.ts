@@ -1,11 +1,35 @@
 import type { CategoryId, StatusId } from "../types/issues";
 
-export const CATEGORIES: { id: CategoryId; label: string }[] = [
-  { id: "road", label: "Yol problemləri" },
-  { id: "waste", label: "Zibil və tullantılar" },
-  { id: "streetlight", label: "Küçə lampalarının nasazlığı" },
-  { id: "sidewalk", label: "Səkilər və təhlükəsizlik" },
-  { id: "other", label: "Digər problemlər" },
+export const CATEGORIES: {
+  id: CategoryId;
+  label: string;
+  description: string;
+}[] = [
+  {
+    id: "road",
+    label: "Yol problemləri",
+    description: "Çuxurlar, zədələnmiş yollar və s.",
+  },
+  {
+    id: "waste",
+    label: "Zibil və tullantılar",
+    description: "Tullantı yığılmaları, təmizlik problemləri.",
+  },
+  {
+    id: "streetlight",
+    label: "Küçə lampalarının nasazlığı",
+    description: "İşıqlandırma ilə bağlı problemlər.",
+  },
+  {
+    id: "sidewalk",
+    label: "Səkilər və təhlükəsizlik",
+    description: "Səkilərin vəziyyəti, piyadalar üçün təhlükə.",
+  },
+  {
+    id: "other",
+    label: "Digər problemlər",
+    description: "Digər ictimai məkan problemləri.",
+  },
 ];
 
 // Tailwind tam sinif adlarını görməlidir, ona görə siniflər dinamik yığılmır.
