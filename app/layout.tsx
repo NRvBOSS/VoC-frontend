@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import Header from "../src/components/layout/Header";
-import Footer from "../src/components/layout/Footer";
 
 const inter = Inter({ subsets: ["latin", "latin-ext"] });
 
@@ -26,10 +25,7 @@ export default function RootLayout({
           Əsas məzmuna keç
         </a>
         <Header />
-        <main id="main" className="flex-1">
-          {children}
-        </main>
-        <Footer />
+        {children}
       </body>
     </html>
   );
