@@ -57,6 +57,18 @@ function ClickToDeselect({ onDeselect }: { onDeselect: () => void }) {
   return null;
 }
 
+function PanToSelected({ issue }: { issue: Issue | undefined }) {
+  const map = useMap();
+  const lat = issue?.lat;
+  const lng = issue?.lng;
+
+  useEffect(() => {
+    if (lat !== undefined && lng !== undefined) map.panTo([lat, lng]);
+  }, [map, lat, lng]);
+
+  return null;
+}
+
 interface IssueMapProps {
   issues: Issue[];
   selectedId: string | null;
@@ -82,6 +94,7 @@ export default function IssueMap({
       <ZoomControl position="bottomright" />
       <ResizeWatcher />
       <ClickToDeselect onDeselect={() => onSelect(null)} />
+      <PanToSelected issue={issues.find((i) => i.id === selectedId)} />
 
       {issues.map((issue) => (
         <Marker

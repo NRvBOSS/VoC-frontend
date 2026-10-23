@@ -1,5 +1,5 @@
 import { STATUSES } from "../../lib/constants";
-import type { StatusId } from "../../types/issues";
+import type { StatusId } from "../../types/issue";
 
 export default function StatusBadge({ status }: { status: StatusId }) {
   const s = STATUSES[status];

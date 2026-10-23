@@ -1,5 +1,4 @@
-import type { CategoryId, StatusId } from "../types/issues";
-
+import type { CategoryId, Filters, StatusId } from "@/types/issue";
 export const CATEGORIES: {
   id: CategoryId;
   label: string;
@@ -58,3 +57,6 @@ export const STATUSES: Record<
 };
 
 export const STATUS_ORDER: StatusId[] = ["open", "in_progress", "resolved"];
+
+
+export const EMPTY_FILTERS: Filters = { categories: [], statuses: [] };
