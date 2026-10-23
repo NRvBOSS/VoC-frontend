@@ -1,0 +1,73 @@
+import type { Issue } from "@/types/issue";
+
+// NÜMUNƏ MƏLUMAT: yalnız inkişaf zamanı vizual test üçündür.
+// Real hadisələri əks etdirmir. Backend inteqrasiyasından sonra silinəcək.
+export const MOCK_ISSUES: Issue[] = [
+  {
+    id: "demo-1",
+    title: "Yolda dərin çuxur",
+    description:
+      "Yolun ortasında böyük çuxur var, avtomobillər üçün təhlükəlidir.",
+    category: "road",
+    status: "open",
+    lat: 40.4093,
+    lng: 49.8671,
+    createdAt: "2025-04-12T09:00:00Z",
+    address: "Nümunə ünvan 1, Bakı",
+  },
+  {
+    id: "demo-2",
+    title: "Konteyner ətrafında zibil yığılıb",
+    description: "Zibil konteynerinin ətrafında tullantılar yığılıb.",
+    category: "waste",
+    status: "in_progress",
+    lat: 40.3953,
+    lng: 49.8822,
+    createdAt: "2025-04-10T12:30:00Z",
+    address: "Nümunə ünvan 2, Bakı",
+  },
+  {
+    id: "demo-3",
+    title: "Küçə lampası işləmir",
+    description: "Lampa bir neçə gündür yanmır, ərazi qaranlıq qalır.",
+    category: "streetlight",
+    status: "open",
+    lat: 40.3797,
+    lng: 49.8486,
+    createdAt: "2025-04-12T18:15:00Z",
+    address: "Nümunə ünvan 3, Bakı",
+  },
+  {
+    id: "demo-4",
+    title: "Səki qırılıb",
+    description: "Səkinin bir hissəsi çökıb, piyadalar yola çıxmağa məcburdur.",
+    category: "sidewalk",
+    status: "resolved",
+    lat: 40.4225,
+    lng: 49.8379,
+    createdAt: "2025-03-28T08:00:00Z",
+    address: "Nümunə ünvan 4, Bakı",
+  },
+  {
+    id: "demo-5",
+    title: "Yaşıl zonada qırıq skamya",
+    description: "Parkdakı skamyalardan biri qırılıb.",
+    category: "other",
+    status: "in_progress",
+    lat: 40.3721,
+    lng: 49.8553,
+    createdAt: "2025-04-05T14:45:00Z",
+    address: "Nümunə ünvan 5, Bakı",
+  },
+  {
+    id: "demo-6",
+    title: "Yol qapağı yerində deyil",
+    description: "Kanalizasiya lyuku açıqdır.",
+    category: "road",
+    status: "open",
+    lat: 40.4318,
+    lng: 49.8785,
+    createdAt: "2025-04-11T07:20:00Z",
+    address: "Nümunə ünvan 6, Bakı",
+  },
+];

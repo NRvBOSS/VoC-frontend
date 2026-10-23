@@ -13,7 +13,12 @@ export interface Issue {
   status: StatusId;
   lat: number;
   lng: number;
-  createdAt: string; // ISO tarix
+  createdAt: string;
   address?: string;
   photos?: string[];
 } 
+
+export interface Filters {
+  categories: CategoryId[];
+  statuses: StatusId[];
+}

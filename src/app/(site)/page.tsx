@@ -1,6 +1,6 @@
 import Link from "next/link";
-import { buttonStyles } from "../src/components/ui/Button";
-import { CATEGORIES } from "../src/lib/constants";
+import { buttonStyles } from "@/components/ui/Button";
+import { CATEGORIES } from "@/lib/constants";
 
 const STEPS = [
   {
