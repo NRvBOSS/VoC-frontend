@@ -3,6 +3,7 @@
 import { useEffect } from "react";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
+
 import {
   MapContainer,
   Marker,
@@ -11,6 +12,7 @@ import {
   useMap,
   useMapEvents,
 } from "react-leaflet";
+
 import { STATUSES } from "../../lib/constants";
 import type { Issue, StatusId } from "@/types/issue";
 
@@ -27,33 +29,50 @@ const iconCache = new Map<string, L.DivIcon>();
 function getIcon(status: StatusId, selected: boolean): L.DivIcon {
   const key = `${status}-${selected}`;
   const cached = iconCache.get(key);
+
   if (cached) return cached;
 
   const size = selected ? 38 : 30;
   const ring = selected ? "0 0 0 3px #0F172A" : "0 0 0 1px rgba(15,23,42,0.35)";
-  // Yalnız constants.ts-dən gələn rəng və simvol istifadə olunur (istifadəçi mətni yoxdur)
+
   const icon = L.divIcon({
     className: "",
     html: `<span style="display:flex;align-items:center;justify-content:center;width:${size}px;height:${size}px;border-radius:50%;background:${STATUSES[status].markerColor};border:3px solid #fff;box-shadow:${ring};color:#fff;font:700 15px/1 system-ui,sans-serif;">${GLYPHS[status]}</span>`,
     iconSize: [size, size],
     iconAnchor: [size / 2, size / 2],
   });
+
   iconCache.set(key, icon);
   return icon;
 }
 
 function ResizeWatcher() {
   const map = useMap();
+
   useEffect(() => {
-    const observer = new ResizeObserver(() => map.invalidateSize());
-    observer.observe(map.getContainer());
-    return () => observer.disconnect();
+    const container = map.getContainer();
+
+    const observer = new ResizeObserver(() => {
+      if (map.getContainer().isConnected) {
+        map.invalidateSize({ pan: false });
+      }
+    });
+
+    observer.observe(container);
+
+    return () => {
+      observer.disconnect();
+    };
   }, [map]);
+
   return null;
 }
 
 function ClickToDeselect({ onDeselect }: { onDeselect: () => void }) {
-  useMapEvents({ click: onDeselect });
+  useMapEvents({
+    click: onDeselect,
+  });
+
   return null;
 }
 
@@ -63,7 +82,9 @@ function PanToSelected({ issue }: { issue: Issue | undefined }) {
   const lng = issue?.lng;
 
   useEffect(() => {
-    if (lat !== undefined && lng !== undefined) map.panTo([lat, lng]);
+    if (lat !== undefined && lng !== undefined) {
+      map.panTo([lat, lng]);
+    }
   }, [map, lat, lng]);
 
   return null;
@@ -80,6 +101,8 @@ export default function IssueMap({
   selectedId,
   onSelect,
 }: IssueMapProps) {
+  const selectedIssue = issues.find((issue) => issue.id === selectedId);
+
   return (
     <MapContainer
       center={BAKU_CENTER}
@@ -91,10 +114,14 @@ export default function IssueMap({
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         url="https://tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
+
       <ZoomControl position="bottomright" />
+
       <ResizeWatcher />
+
       <ClickToDeselect onDeselect={() => onSelect(null)} />
-      <PanToSelected issue={issues.find((i) => i.id === selectedId)} />
+
+      <PanToSelected issue={selectedIssue} />
 
       {issues.map((issue) => (
         <Marker
@@ -102,7 +129,9 @@ export default function IssueMap({
           position={[issue.lat, issue.lng]}
           icon={getIcon(issue.status, issue.id === selectedId)}
           title={`${issue.title} (${STATUSES[issue.status].label})`}
-          eventHandlers={{ click: () => onSelect(issue.id) }}
+          eventHandlers={{
+            click: () => onSelect(issue.id),
+          }}
         />
       ))}
     </MapContainer>
