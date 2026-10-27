@@ -28,7 +28,11 @@ const pickedIcon = L.divIcon({
 
 function ClickToPick({ onPick }: { onPick: (p: LatLng) => void }) {
   useMapEvents({
-    click: (e) => onPick({ lat: e.latlng.lat, lng: e.latlng.lng }),
+    click: (e) => {
+      // wrap(): xəritə dünya boyu sürüşdürüləndə uzunluğu -180..180 aralığına qaytarır
+      const p = e.latlng.wrap();
+      onPick({ lat: p.lat, lng: p.lng });
+    },
   });
   return null;
 }
@@ -42,17 +46,17 @@ function CenterButton({ onPick }: { onPick: (p: LatLng) => void }) {
   }, []);
 
   return (
-    <button
-      ref={ref}
-      type="button"
-      onClick={() => {
-        const c = map.getCenter();
-        onPick({ lat: c.lat, lng: c.lng });
-      }}
-      className="absolute left-3 top-3 z-[1000] rounded-lg border border-slate-300 bg-white px-3 py-2 text-xs font-semibold text-slate-900 hover:bg-slate-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
-    >
-      Xəritənin mərkəzini seç
-    </button>
+      <button
+          ref={ref}
+          type="button"
+          onClick={() => {
+            const c = map.getCenter().wrap();
+            onPick({ lat: c.lat, lng: c.lng });
+          }}
+          className="absolute left-3 top-3 z-[1000] rounded-lg border border-slate-300 bg-white px-3 py-2 text-xs font-semibold text-slate-900 hover:bg-slate-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
+      >
+        Xəritənin mərkəzini seç
+      </button>
   );
 }
 
@@ -63,20 +67,22 @@ interface LocationPickerProps {
 
 export default function LocationPicker({ value, onPick }: LocationPickerProps) {
   return (
-    <MapContainer
-      center={value ? [value.lat, value.lng] : BAKU_CENTER}
-      zoom={12}
-      zoomControl={false}
-      className="h-full w-full"
-    >
-      <TileLayer
-        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-        url="https://tile.openstreetmap.org/{z}/{x}/{y}.png"
-      />
-      <ZoomControl position="bottomright" />
-      <ClickToPick onPick={onPick} />
-      <CenterButton onPick={onPick} />
-      {value && <Marker position={[value.lat, value.lng]} icon={pickedIcon} />}
-    </MapContainer>
+      <MapContainer
+          center={value ? [value.lat, value.lng] : BAKU_CENTER}
+          zoom={12}
+          zoomControl={false}
+          className="h-full w-full"
+      >
+        <TileLayer
+            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            url="https://tile.openstreetmap.org/{z}/{x}/{y}.png"
+        />
+        <ZoomControl position="bottomright" />
+        <ClickToPick onPick={onPick} />
+        <CenterButton onPick={onPick} />
+        {value && (
+            <Marker position={[value.lat, value.lng]} icon={pickedIcon} />
+        )}
+      </MapContainer>
   );
 }
