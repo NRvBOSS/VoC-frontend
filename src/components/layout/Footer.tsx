@@ -16,6 +16,9 @@ export default function Footer() {
             <Link href="/report" className="hover:text-slate-900">
               Problem bildir
             </Link>
+            <Link href="/about" className="hover:text-slate-900">
+              Haqqımızda
+            </Link>
           </nav>
         </div>
       </footer>
