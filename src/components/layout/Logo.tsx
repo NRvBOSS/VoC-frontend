@@ -21,13 +21,13 @@ export function LogoMark({ className = "" }: { className?: string }) {
 
 export default function Logo() {
     return (
-        <span className="flex items-center gap-2.5">
-      <LogoMark className="h-9 w-9 shrink-0" />
+        <span className="flex items-center gap-3">
+      <LogoMark className="h-10 w-10 shrink-0 sm:h-11 sm:w-11" />
       <span className="hidden leading-tight sm:block">
-        <span lang="en" className="block text-base font-bold text-slate-900">
+        <span lang="en" className="block text-lg font-bold text-slate-900">
           {BRAND.name}
         </span>
-        <span className="block text-xs font-medium text-slate-600">
+        <span className="block text-sm font-medium text-slate-600">
           {BRAND.nameAz}
         </span>
       </span>
