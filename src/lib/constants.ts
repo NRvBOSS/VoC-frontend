@@ -32,27 +32,31 @@ export const CATEGORIES: {
 ];
 
 // Tailwind tam sinif adlarını görməlidir, ona görə siniflər dinamik yığılmır.
+// Tailwind tam sinif adlarını görməlidir, ona görə siniflər dinamik yığılmır.
 export const STATUSES: Record<
-  StatusId,
-  { label: string; markerColor: string; badge: string; dot: string }
+    StatusId,
+    { label: string; markerColor: string; badge: string; dot: string; glyph: string }
 > = {
   open: {
     label: "Açıq",
     markerColor: "#F59E0B",
     badge: "bg-amber-50 text-amber-800 border-amber-200",
     dot: "bg-amber-500",
+    glyph: "!",
   },
   in_progress: {
     label: "İşlənilir",
     markerColor: "#3B82F6",
     badge: "bg-blue-50 text-blue-800 border-blue-200",
     dot: "bg-blue-500",
+    glyph: "…",
   },
   resolved: {
     label: "Həll olunub",
     markerColor: "#16A34A",
     badge: "bg-green-50 text-green-800 border-green-200",
     dot: "bg-green-600",
+    glyph: "✓",
   },
 };
 

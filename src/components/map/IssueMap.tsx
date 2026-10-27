@@ -18,12 +18,6 @@ import type { Issue, StatusId } from "@/types/issue";
 
 const BAKU_CENTER: [number, number] = [40.4093, 49.8671];
 
-const GLYPHS: Record<StatusId, string> = {
-  open: "!",
-  in_progress: "…",
-  resolved: "✓",
-};
-
 const iconCache = new Map<string, L.DivIcon>();
 
 function getIcon(status: StatusId, selected: boolean): L.DivIcon {
@@ -37,7 +31,7 @@ function getIcon(status: StatusId, selected: boolean): L.DivIcon {
 
   const icon = L.divIcon({
     className: "",
-    html: `<span style="display:flex;align-items:center;justify-content:center;width:${size}px;height:${size}px;border-radius:50%;background:${STATUSES[status].markerColor};border:3px solid #fff;box-shadow:${ring};color:#fff;font:700 15px/1 system-ui,sans-serif;">${GLYPHS[status]}</span>`,
+    html: `<span style="display:flex;align-items:center;justify-content:center;width:${size}px;height:${size}px;border-radius:50%;background:${STATUSES[status].markerColor};border:3px solid #fff;box-shadow:${ring};color:#fff;font:700 15px/1 system-ui,sans-serif;">${STATUSES[status].glyph}</span>`,
     iconSize: [size, size],
     iconAnchor: [size / 2, size / 2],
   });

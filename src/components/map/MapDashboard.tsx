@@ -10,6 +10,7 @@ import { EMPTY_FILTERS } from "@/lib/constants";
 import type { Filters, Issue } from "@/types/issue";
 import FilterPanel from "./FilterPanel";
 import IssueDetailPanel from "./IssueDetailPanel";
+import MapLegend from "./MapLegend";
 
 // Leaflet window-dan istifadə edir, ona görə serverdə yüklənmir
 const IssueMap = dynamic(() => import("./IssueMap"), {
@@ -155,6 +156,8 @@ export default function MapDashboard() {
               selectedId={selectedIssue?.id ?? null}
               onSelect={setSelectedId}
           />
+
+            <MapLegend />
 
           <div className="absolute left-3 top-3 z-[1000] xl:hidden">
             <Button variant="secondary" onClick={() => setFiltersOpen(true)}>
