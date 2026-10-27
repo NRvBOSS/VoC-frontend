@@ -1,8 +1,7 @@
 import Link from "next/link";
 import ReportForm from "@/components/report/ReportForm";
 
-export const metadata = { title: "Problem bildir | ŞəhərSəsi" };
-
+export const metadata = { title: "Problem bildir" };
 const TIPS = [
   "Əvvəlcə xəritədə eyni problemin artıq bildirilib-bildirilmədiyinə baxın.",
   "Başlığı qısa və konkret yazın, məsələn: “Nizami küçəsində açıq lyuk”.",

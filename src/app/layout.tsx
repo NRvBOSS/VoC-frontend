@@ -2,31 +2,35 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/layout/Header";
+import { BRAND } from "@/lib/brand";
 
 const inter = Inter({ subsets: ["latin", "latin-ext"] });
 
 export const metadata: Metadata = {
-  title: "ŞəhərSəsi",
+  title: {
+    default: `${BRAND.name} (${BRAND.nameAz})`,
+    template: `%s | ${BRAND.name}`,
+  },
   description: "Şəhərdəki problemləri xəritədə görün və bildirin.",
 };
 
 export default function RootLayout({
-  children,
-}: {
+                                     children,
+                                   }: {
   children: React.ReactNode;
 }) {
   return (
-    <html lang="az">
+      <html lang="az">
       <body className={`${inter.className} flex min-h-dvh flex-col`}>
-        <a
+      <a
           href="#main"
           className="sr-only focus:not-sr-only focus:absolute focus:left-2 focus:top-2 focus:z-50 focus:rounded-md focus:bg-white focus:px-3 focus:py-2 focus:text-sm focus:font-medium focus:text-blue-700"
-        >
-          Əsas məzmuna keç
-        </a>
-        <Header />
-        {children}
+      >
+        Əsas məzmuna keç
+      </a>
+      <Header />
+      {children}
       </body>
-    </html>
+      </html>
   );
 }

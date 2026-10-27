@@ -1,32 +1,28 @@
 import Link from "next/link";
+import Logo from "./Logo";
 import NavLinks from "./NavLinks";
-import { buttonStyles } from "../../components/ui/Button";
+import { buttonStyles } from "@/components/ui/Button";
+import { BRAND } from "@/lib/brand";
 
 export default function Header() {
   return (
-    <header className="border-b border-slate-200 bg-white">
-      <div className="mx-auto flex h-16 max-w-screen-2xl items-center justify-between gap-2 px-3 sm:px-6">
-        <div className="flex items-center gap-2 sm:gap-8">
-          <Link
-            href="/"
-            className="flex items-center gap-2 rounded-md text-lg font-bold text-slate-900 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
-          >
-            <span
-              aria-hidden
-              className="grid h-8 w-8 place-items-center rounded-lg bg-blue-600 text-sm text-white"
+      <header className="border-b border-slate-200 bg-white">
+        <div className="mx-auto flex h-16 max-w-screen-2xl items-center justify-between gap-2 px-3 sm:px-6">
+          <div className="flex items-center gap-2 sm:gap-8">
+            <Link
+                href="/"
+                aria-label={`${BRAND.name} (${BRAND.nameAz}), ana səhifə`}
+                className="rounded-md focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
             >
-              Ş
-            </span>
-            <span className="hidden sm:inline">ŞəhərSəsi</span>
-            <span className="sr-only sm:hidden">ŞəhərSəsi</span>
-          </Link>
-          <NavLinks />
-        </div>
+              <Logo />
+            </Link>
+            <NavLinks />
+          </div>
 
-        <Link href="/report" className={buttonStyles("primary")}>
-          Problem bildir
-        </Link>
-      </div>
-    </header>
+          <Link href="/report" className={buttonStyles("primary")}>
+            Problem bildir
+          </Link>
+        </div>
+      </header>
   );
 }

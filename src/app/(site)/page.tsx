@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { buttonStyles } from "@/components/ui/Button";
 import { CATEGORIES } from "@/lib/constants";
+import { LogoMark } from "@/components/layout/Logo";
 
 const STEPS = [
   {
@@ -71,9 +72,9 @@ export default function Home() {
               </h1>
 
               <p className="mt-4 max-w-xl text-base leading-relaxed text-slate-600">
-                ŞəhərSəsi şəhərimizdəki problemləri qeyd etmək, onları xəritədə
-                görmək və daha yaxşı bir şəhər üçün birlikdə addım atmaq
-                platformasıdır.
+                <span lang="en">Voice of City</span> (Şəhərin Səsi) şəhərimizdəki
+                problemləri qeyd etmək, onları xəritədə görmək və daha yaxşı bir
+                şəhər üçün birlikdə addım atmaq platformasıdır.
               </p>
 
               <div className="mt-8 flex flex-wrap gap-3">
@@ -92,8 +93,11 @@ export default function Home() {
                 className="hidden aspect-[4/3] rounded-2xl border border-blue-100 bg-blue-50 lg:block"
             >
               <div className="grid h-full place-items-center">
-                <div className="grid h-20 w-20 place-items-center rounded-2xl bg-blue-600 text-4xl font-bold text-white">
-                  Ş
+                <div
+                    aria-hidden
+                    className="hidden aspect-[4/3] place-items-center rounded-2xl border border-blue-100 bg-blue-50 lg:grid"
+                >
+                  <LogoMark className="h-32 w-32" />
                 </div>
               </div>
             </div>

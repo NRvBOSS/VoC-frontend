@@ -1,7 +1,6 @@
 import MapDashboard from "@/components/map/MapDashboard";
 
-export const metadata = { title: "Xəritə | ŞəhərinSəsi" };
-
+export const metadata = { title: "Xəritə" };
 export default function MapPage() {
     return (
         <main id="main" className="h-[calc(100dvh-4rem)]">
