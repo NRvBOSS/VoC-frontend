@@ -1,12 +1,11 @@
-import MapDashboard from "../../components/map/MapDashboard";
-import { MOCK_ISSUES } from "../../lib/mock-issues";
+import MapDashboard from "@/components/map/MapDashboard";
 
-export const metadata = { title: "Xəritə | ŞəhərSəsi" };
+export const metadata = { title: "Xəritə | ŞəhərinSəsi" };
 
 export default function MapPage() {
-  return (
-    <main id="main" className="h-[calc(100dvh-4rem)]">
-      <MapDashboard issues={MOCK_ISSUES} />
-    </main>
-  );
+    return (
+        <main id="main" className="h-[calc(100dvh-4rem)]">
+            <MapDashboard />
+        </main>
+    );
 }

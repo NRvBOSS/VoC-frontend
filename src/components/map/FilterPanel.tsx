@@ -14,7 +14,7 @@ interface FilterPanelProps {
   onChange: (next: Filters) => void;
   onReset: () => void;
   onClose: () => void;
-  resultCount: number;
+  resultCount: number | null;
   children?: ReactNode;
 }
 
@@ -117,9 +117,11 @@ export default function FilterPanel({
           >
             Problemlər
           </h3>
-          <p aria-live="polite" className="mb-3 mt-1 text-xs text-slate-600">
-            {resultCount} problem göstərilir
-          </p>
+          {resultCount !== null && (
+              <p aria-live="polite" className="mb-3 mt-1 text-xs text-slate-600">
+                {resultCount} problem göstərilir
+              </p>
+          )}
           {children}
         </section>
       </div>
