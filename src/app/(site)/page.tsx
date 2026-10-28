@@ -3,6 +3,7 @@ import type { ReactNode } from "react";
 import MapPreview from "@/components/home/MapPreview";
 import { buttonStyles } from "@/components/ui/Button";
 import { CATEGORIES } from "@/lib/constants";
+import RecentIssues from "@/components/home/RecentIssues";
 
 function Icon({ children }: { children: ReactNode }) {
   return (
@@ -132,6 +133,8 @@ export default function Home() {
             <MapPreview />
           </div>
         </section>
+
+        <RecentIssues />
 
         {/* Nəyə kömək edir */}
         <section className="mx-auto max-w-screen-2xl px-4 py-12 sm:px-6">
