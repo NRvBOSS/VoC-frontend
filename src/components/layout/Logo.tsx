@@ -23,11 +23,14 @@ export default function Logo() {
     return (
         <span className="flex items-center gap-3">
       <LogoMark className="h-10 w-10 shrink-0 sm:h-11 sm:w-11" />
-      <span className="hidden leading-tight sm:block">
-        <span lang="en" className="block text-lg font-bold text-slate-900">
+      <span className="hidden leading-none sm:block">
+        <span
+            lang="en"
+            className="block font-[family-name:var(--font-display)] text-xl font-bold tracking-tight text-slate-900"
+        >
           {BRAND.name}
         </span>
-        <span className="block text-sm font-medium text-slate-600">
+        <span className="mt-1 block text-xs font-medium tracking-wide text-slate-600">
           {BRAND.nameAz}
         </span>
       </span>

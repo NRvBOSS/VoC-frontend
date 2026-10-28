@@ -1,14 +1,85 @@
 @import "tailwindcss";
 
-:root {
-  color-scheme: light;
-  --background: #f8fafc;
-  --foreground: #0f172a;
+@theme inline {
+  --font-sans: var(--font-onest), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-fraunces), Georgia, serif;
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
+@theme static {
+  /* İsti neytral şkala: köhnə soyuq slate əvəzinə */
+  --color-slate-50: #f7f5f0;
+  --color-slate-100: #efece4;
+  --color-slate-200: #e3dfd3;
+  --color-slate-300: #cfcabb;
+  --color-slate-400: #a39e8f;
+  --color-slate-500: #6f6a5d;
+  --color-slate-600: #57534a;
+  --color-slate-700: #3f3c35;
+  --color-slate-800: #1b2a40;
+  --color-slate-900: #0f1b2d;
+  --color-slate-950: #0a1322;
+
+  --color-paper: #f7f5f0;
+  --color-ink: #0f1b2d;
+
+  --shadow-card:
+          0 1px 2px rgb(15 27 45 / 0.06), 0 8px 20px -10px rgb(15 27 45 / 0.18);
+}
+
+@layer base {
+  body {
+    background: var(--color-paper);
+    color: var(--color-ink);
+  }
+
+  h1 {
+    font-family: var(--font-display);
+    letter-spacing: -0.015em;
+  }
+}
+
+/* Dekorativ nöqtə şəbəkəsi (xəritə kağızı hissi) */
+.bg-dots {
+  background-image: radial-gradient(
+          circle,
+          rgb(15 27 45 / 0.14) 1px,
+          transparent 1.5px
+  );
+  background-size: 22px 22px;
+}
+
+/* Xəritə nişanı ətrafında "siqnal" halqası */
+@keyframes signal {
+  0% {
+    transform: scale(0.5);
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(2.4);
+    opacity: 0;
+  }
+}
+.signal-ring {
+  animation: signal 2.6s cubic-bezier(0.2, 0.6, 0.3, 1) infinite;
+}
+
+/* Scroll-da yumşaq görünmə. Dəstəkləməyən brauzerlərdə məzmun adi göstərilir */
+@keyframes reveal-up {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@supports (animation-timeline: view()) {
+  .reveal {
+    animation: reveal-up linear both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 35%;
+  }
 }
 
 /* Klaviatura ilə marker seçimi üçün görünən fokus çərçivəsi */
@@ -18,7 +89,7 @@ body {
   border-radius: 9999px;
 }
 
-/* Hərəkəti azaltmaq istəyənlər üçün keçid və animasiyaları söndür */
+/* Hərəkəti azaltmaq istəyənlər üçün hər şeyi söndür */
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -26,5 +97,8 @@ body {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
+  }
+  .reveal {
+    animation: none !important;
   }
 }

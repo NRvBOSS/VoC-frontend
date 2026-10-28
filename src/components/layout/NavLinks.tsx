@@ -13,7 +13,7 @@ export default function NavLinks() {
   const pathname = usePathname();
 
   return (
-      <nav aria-label="Əsas naviqasiya" className="flex items-center gap-1">
+      <nav aria-label="Əsas naviqasiya" className="flex items-stretch gap-1">
         {links.map(({ href, label, hideOnMobile }) => {
           const active =
               href === "/" ? pathname === "/" : pathname.startsWith(href);
@@ -22,10 +22,12 @@ export default function NavLinks() {
                   key={href}
                   href={href}
                   aria-current={active ? "page" : undefined}
-                  className={`rounded-md px-2 py-2 text-sm font-medium focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 sm:px-3 sm:text-base ${
-                      hideOnMobile ? "hidden sm:block" : ""
+                  className={`items-center border-b-2 px-2 text-sm font-medium focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-blue-600 sm:px-3 sm:text-base ${
+                      hideOnMobile ? "hidden sm:inline-flex" : "inline-flex"
                   } ${
-                      active ? "text-blue-700" : "text-slate-600 hover:text-slate-900"
+                      active
+                          ? "border-blue-600 text-slate-900"
+                          : "border-transparent text-slate-600 hover:text-slate-900"
                   }`}
               >
                 {label}
