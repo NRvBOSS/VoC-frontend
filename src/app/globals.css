@@ -10,3 +10,21 @@ body {
   background: var(--background);
   color: var(--foreground);
 }
+
+/* Klaviatura ilə marker seçimi üçün görünən fokus çərçivəsi */
+.leaflet-marker-icon:focus-visible {
+  outline: 3px solid #2563eb;
+  outline-offset: 3px;
+  border-radius: 9999px;
+}
+
+/* Hərəkəti azaltmaq istəyənlər üçün keçid və animasiyaları söndür */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
