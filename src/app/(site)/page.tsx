@@ -1,71 +1,40 @@
 import Link from "next/link";
-import type { ReactNode } from "react";
-import MapPreview from "@/components/home/MapPreview";
+import {
+  ArrowRight,
+  Check,
+  Clock,
+  Copy,
+  Info,
+  Map as MapIcon,
+  MapPin,
+  Plus,
+} from "lucide-react";
+import HeroMap from "@/components/home/HeroMap";
+import RecentIssues from "@/components/home/RecentIssues";
+import CategoryIcon from "@/components/ui/CategoryIcon";
 import { buttonStyles } from "@/components/ui/Button";
 import { CATEGORIES } from "@/lib/constants";
-import RecentIssues from "@/components/home/RecentIssues";
 
-function Icon({ children }: { children: ReactNode }) {
-  return (
-      <span
-          aria-hidden
-          className="grid h-10 w-10 place-items-center rounded-lg bg-blue-50 text-blue-700"
-      >
-      <svg
-          viewBox="0 0 24 24"
-          className="h-5 w-5"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="1.8"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-      >
-        {children}
-      </svg>
-    </span>
-  );
-}
-
-const BENEFITS: { title: string; text: string; icon: ReactNode }[] = [
+const BENEFITS = [
   {
     title: "Bütün problemlər bir xəritədə",
     text: "Bildirilmiş problemlər xəritədə yerləri ilə görünür. Kateqoriya və statusa görə süzgəcdən keçirə bilərsiniz.",
-    icon: (
-        <>
-          <path d="M9 4 3 6v14l6-2 6 2 6-2V4l-6 2-6-2Z" />
-          <path d="M9 4v14M15 6v14" />
-        </>
-    ),
+    Icon: MapIcon,
   },
   {
     title: "Təkrar bildirişin qarşısını alın",
     text: "Yazmazdan əvvəl xəritəyə baxın: eyni yerdə problem artıq bildirilibsə, təkrar yazmağa ehtiyac qalmır.",
-    icon: (
-        <>
-          <rect x="8" y="8" width="12" height="12" rx="2" />
-          <path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2" />
-        </>
-    ),
+    Icon: Copy,
   },
   {
     title: "Yeri dəqiq göstərin",
     text: "Ünvanı sözlə izah etmək əvəzinə problemin yerini xəritədə nöqtə ilə seçirsiniz.",
-    icon: (
-        <>
-          <path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11Z" />
-          <circle cx="12" cy="10" r="2.5" />
-        </>
-    ),
+    Icon: MapPin,
   },
   {
     title: "Vəziyyəti izləyin",
     text: "Hər bildirişin statusu (Açıq, İşlənilir, Həll olunub) həm mətn, həm də rənglə göstərilir.",
-    icon: (
-        <>
-          <circle cx="12" cy="12" r="9" />
-          <path d="M12 7v5l3 2" />
-        </>
-    ),
+    Icon: Clock,
   },
 ];
 
@@ -102,79 +71,136 @@ const AUDIENCES = [
   },
 ];
 
+const h2 =
+    "font-display text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl";
+
 export default function Home() {
   return (
       <>
         {/* Hero */}
-        <section className="border-b border-slate-200 bg-white">
-          <div className="mx-auto grid max-w-screen-2xl items-center gap-10 px-4 py-12 sm:px-6 md:py-16 lg:grid-cols-2">
+        <section className="relative overflow-hidden border-b border-slate-200">
+          <div
+              aria-hidden
+              className="bg-dots absolute inset-0 [mask-image:linear-gradient(to_bottom,black,transparent_85%)]"
+          />
+          <div className="relative mx-auto grid max-w-screen-2xl items-center gap-12 px-4 py-14 sm:px-6 lg:grid-cols-[1.05fr_1fr] lg:py-20">
             <div>
-              <h1 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
-                Şəhər problemlərini birlikdə həll edək
+              <h1 className="text-4xl font-bold leading-[1.08] tracking-tight text-slate-900 sm:text-5xl lg:text-6xl">
+                Şəhər problemlərini{" "}
+                <span className="relative whitespace-nowrap">
+                birlikdə
+                <svg
+                    aria-hidden
+                    viewBox="0 0 250 12"
+                    preserveAspectRatio="none"
+                    className="absolute -bottom-1.5 left-0 h-3 w-full text-blue-600"
+                >
+                  <path
+                      className="draw-line"
+                      pathLength={1}
+                      d="M3 8 C 50 2, 100 11, 150 5 S 220 4, 247 8"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth={4}
+                      strokeLinecap="round"
+                  />
+                </svg>
+              </span>{" "}
+                həll edək
               </h1>
-              <p className="mt-4 max-w-xl text-base leading-relaxed text-slate-600">
+              <p className="mt-6 max-w-xl text-lg leading-relaxed text-slate-600">
                 <span lang="en">Voice of City</span> (Şəhərin Səsi) şəhərimizdəki
                 problemləri qeyd etmək, onları xəritədə görmək və daha yaxşı bir
                 şəhər üçün birlikdə addım atmaq platformasıdır.
               </p>
               <div className="mt-8 flex flex-wrap gap-3">
-                <Link href="/report" className={buttonStyles("primary")}>
+                <Link href="/report" className={buttonStyles("primary", "lg")}>
+                  <Plus aria-hidden className="h-4 w-4" strokeWidth={2.5} />
                   Problemi bildir
                 </Link>
-                <Link href="/map" className={buttonStyles("secondary")}>
+                <Link href="/map" className={buttonStyles("secondary", "lg")}>
                   Xəritəyə bax
+                  <ArrowRight aria-hidden className="h-4 w-4" />
                 </Link>
               </div>
-              <p className="mt-4 text-sm text-slate-600">
-                Xəritədəki bütün bildirişləri hər kəs görə bilər.
-              </p>
+              <ul className="mt-6 flex flex-wrap gap-x-5 gap-y-2 text-sm text-slate-600">
+                <li className="flex items-center gap-1.5">
+                  <Check
+                      aria-hidden
+                      className="h-4 w-4 text-green-700"
+                      strokeWidth={2.5}
+                  />
+                  Qeydiyyat tələb olunmur
+                </li>
+                <li className="flex items-center gap-1.5">
+                  <Check
+                      aria-hidden
+                      className="h-4 w-4 text-green-700"
+                      strokeWidth={2.5}
+                  />
+                  Bildirişləri hər kəs görə bilər
+                </li>
+              </ul>
             </div>
 
-            <MapPreview />
+            <HeroMap />
           </div>
         </section>
 
         <RecentIssues />
 
         {/* Nəyə kömək edir */}
-        <section className="mx-auto max-w-screen-2xl px-4 py-12 sm:px-6">
-          <h2 className="text-xl font-semibold text-slate-900">
-            Platforma nəyə kömək edir?
-          </h2>
-          <ul className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {BENEFITS.map((b) => (
-                <li
-                    key={b.title}
-                    className="rounded-xl border border-slate-200 bg-white p-5"
-                >
-                  <Icon>{b.icon}</Icon>
-                  <h3 className="mt-4 text-sm font-semibold text-slate-900">
-                    {b.title}
-                  </h3>
-                  <p className="mt-1 text-sm leading-relaxed text-slate-600">
-                    {b.text}
-                  </p>
-                </li>
-            ))}
-          </ul>
+        <section className="mx-auto max-w-screen-2xl px-4 pb-16 sm:px-6 lg:pb-24">
+          <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.6fr)] lg:gap-16">
+            <div className="reveal lg:sticky lg:top-28 lg:self-start">
+              <h2 className={h2}>Platforma nəyə kömək edir?</h2>
+              <p className="mt-4 max-w-md text-base leading-relaxed text-slate-600">
+                Problemlər bir yerdə toplanır: yeri, kateqoriyası və vəziyyəti
+                ilə birlikdə.
+              </p>
+            </div>
+
+            <ul className="divide-y divide-slate-200 border-y border-slate-200">
+              {BENEFITS.map(({ title, text, Icon }) => (
+                  <li key={title} className="reveal flex gap-5 py-7">
+                    <Icon
+                        aria-hidden
+                        className="mt-1 h-6 w-6 shrink-0 text-blue-700"
+                        strokeWidth={1.75}
+                    />
+                    <div>
+                      <h3 className="font-display text-xl font-semibold text-slate-900">
+                        {title}
+                      </h3>
+                      <p className="mt-2 text-base leading-relaxed text-slate-600">
+                        {text}
+                      </p>
+                    </div>
+                  </li>
+              ))}
+            </ul>
+          </div>
         </section>
 
         {/* Kateqoriyalar */}
         <section className="border-y border-slate-200 bg-white">
-          <div className="mx-auto max-w-screen-2xl px-4 py-12 sm:px-6">
-            <h2 className="text-xl font-semibold text-slate-900">
-              Hansı problemləri bildirə bilərsiniz?
-            </h2>
-            <ul className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
+          <div className="mx-auto max-w-screen-2xl px-4 py-16 sm:px-6 lg:py-20">
+            <h2 className={`${h2} reveal`}>Hansı problemləri bildirə bilərsiniz?</h2>
+            <p className="mt-4 max-w-2xl text-base leading-relaxed text-slate-600">
+              Yol, zibil, işıqlandırma, səki və digər ictimai məkan problemləri.
+            </p>
+            <ul className="mt-8 flex flex-wrap gap-3">
               {CATEGORIES.map((c) => (
                   <li
                       key={c.id}
-                      className="rounded-xl border border-slate-200 bg-slate-50 p-4"
+                      title={c.description}
+                      className="reveal flex items-center gap-2.5 rounded-full border border-slate-300 bg-paper px-5 py-3 text-base font-medium text-slate-900"
                   >
-                    <h3 className="text-sm font-semibold text-slate-900">
-                      {c.label}
-                    </h3>
-                    <p className="mt-1 text-sm text-slate-600">{c.description}</p>
+                    <CategoryIcon
+                        id={c.id}
+                        className="h-5 w-5 text-blue-700"
+                    />
+                    {c.label}
                   </li>
               ))}
             </ul>
@@ -182,61 +208,67 @@ export default function Home() {
         </section>
 
         {/* Necə işləyir */}
-        <section className="mx-auto max-w-screen-2xl px-4 py-12 sm:px-6">
-          <h2 className="text-xl font-semibold text-slate-900">Necə işləyir?</h2>
-          <ol className="mt-6 grid gap-6 md:grid-cols-3">
-            {STEPS.map((s, i) => (
-                <li key={s.title} className="flex gap-4">
-              <span
-                  aria-hidden
-                  className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-blue-600 text-sm font-semibold text-white"
-              >
-                {i + 1}
-              </span>
-                  <div>
-                    <h3 className="font-semibold text-slate-900">{s.title}</h3>
-                    <p className="mt-1 text-sm text-slate-600">{s.text}</p>
-                  </div>
-                </li>
-            ))}
-          </ol>
-        </section>
-
-        {/* Kimlər üçündür, məlumat kimə çatır */}
-        <section className="border-t border-slate-200 bg-white">
-          <div className="mx-auto max-w-screen-2xl px-4 py-12 sm:px-6">
-            <h2 className="text-xl font-semibold text-slate-900">
-              Kimlər üçündür və məlumat kimə çatır?
+        <section className="bg-ink text-white">
+          <div className="mx-auto max-w-screen-2xl px-4 py-16 sm:px-6 lg:py-24">
+            <h2 className="font-display text-3xl font-bold tracking-tight sm:text-4xl">
+              Necə işləyir?
             </h2>
-            <ul className="mt-6 grid gap-4 md:grid-cols-3">
-              {AUDIENCES.map((a) => (
-                  <li
-                      key={a.title}
-                      className="rounded-xl border border-slate-200 bg-slate-50 p-5"
-                  >
-                    <div className="flex items-center justify-between gap-2">
-                      <h3 className="text-sm font-semibold text-slate-900">
-                        {a.title}
-                      </h3>
-                      {a.tag && (
-                          <span className="rounded-full border border-slate-300 bg-white px-2 py-0.5 text-xs font-medium text-slate-700">
-                      {a.tag}
-                    </span>
-                      )}
-                    </div>
-                    <p className="mt-2 text-sm leading-relaxed text-slate-600">
-                      {a.text}
+            <ol className="mt-12 grid gap-10 md:grid-cols-3 md:gap-8">
+              {STEPS.map((s, i) => (
+                  <li key={s.title} className="reveal border-t border-white/20 pt-6">
+                <span
+                    aria-hidden
+                    className="font-display text-5xl font-bold text-blue-400"
+                >
+                  {`0${i + 1}`}
+                </span>
+                    <h3 className="mt-4 text-lg font-semibold">{s.title}</h3>
+                    <p className="mt-2 text-base leading-relaxed text-slate-300">
+                      {s.text}
                     </p>
                   </li>
               ))}
-            </ul>
+            </ol>
+          </div>
+        </section>
 
-            <p className="mt-4 text-sm text-slate-600">
-              Bildirişlərin rəsmi qurumlara çatdırılması mexanizmi hələ
-              təsdiqlənməyib. Belə əməkdaşlıq olduqda bu səhifədə açıq yazılacaq.
-            </p>
+        {/* Kimlər üçündür, məlumat kimə çatır */}
+        <section className="mx-auto max-w-screen-2xl px-4 py-16 sm:px-6 lg:py-24">
+          <h2 className={`${h2} reveal`}>
+            Kimlər üçündür və məlumat kimə çatır?
+          </h2>
+          <ul className="mt-10 grid gap-10 md:grid-cols-3">
+            {AUDIENCES.map((a) => (
+                <li key={a.title} className="reveal border-t-2 border-ink pt-5">
+                  <div className="flex items-center justify-between gap-2">
+                    <h3 className="font-display text-xl font-semibold text-slate-900">
+                      {a.title}
+                    </h3>
+                    {a.tag && (
+                        <span className="rounded-full border border-slate-300 bg-white px-2.5 py-0.5 text-xs font-medium text-slate-700">
+                    {a.tag}
+                  </span>
+                    )}
+                  </div>
+                  <p className="mt-3 text-base leading-relaxed text-slate-600">
+                    {a.text}
+                  </p>
+                </li>
+            ))}
+          </ul>
 
-            <div className="mt-6 rounded-xl border border-blue-200 bg-blue-50 p-4 text-sm leading-relaxed text-blue-900">
+          <p className="mt-6 max-w-3xl text-sm text-slate-600">
+            Bildirişlərin rəsmi qurumlara çatdırılması mexanizmi hələ
+            təsdiqlənməyib. Belə əməkdaşlıq olduqda bu səhifədə açıq yazılacaq.
+          </p>
+
+          <div className="mt-8 flex gap-4 rounded-2xl border border-blue-200 bg-blue-50 p-5 text-blue-900">
+            <Info
+                aria-hidden
+                className="mt-0.5 h-5 w-5 shrink-0 text-blue-700"
+                strokeWidth={1.75}
+            />
+            <div className="text-sm leading-relaxed">
               <p className="font-semibold">Yazdığınız məlumat kimə görünür?</p>
               <p className="mt-1">
                 Bildirişin başlığı, təsviri və yeri xəritədə hamıya görünür.
@@ -247,21 +279,36 @@ export default function Home() {
         </section>
 
         {/* Son çağırış */}
-        <section className="mx-auto max-w-screen-2xl px-4 py-12 sm:px-6">
-          <div className="rounded-2xl border border-slate-200 bg-white p-8 text-center">
-            <h2 className="text-xl font-semibold text-slate-900">
-              Ətrafınızda problem görürsünüz?
-            </h2>
-            <p className="mx-auto mt-2 max-w-xl text-sm text-slate-600">
-              Bir neçə dəqiqəyə bildirin ki, digər sakinlər də onu xəritədə görsün.
-            </p>
-            <div className="mt-6 flex flex-wrap justify-center gap-3">
-              <Link href="/report" className={buttonStyles("primary")}>
-                Problemi bildir
-              </Link>
-              <Link href="/map" className={buttonStyles("secondary")}>
-                Xəritəyə bax
-              </Link>
+        <section className="mx-auto max-w-screen-2xl px-4 pb-16 sm:px-6 lg:pb-24">
+          <div className="relative overflow-hidden rounded-3xl bg-blue-600 px-6 py-14 text-center text-white sm:px-12 sm:py-16">
+            <div
+                aria-hidden
+                className="absolute inset-0 [background-image:radial-gradient(circle,rgb(255_255_255/0.18)_1px,transparent_1.5px)] [background-size:22px_22px]"
+            />
+            <div className="relative">
+              <h2 className="font-display text-3xl font-bold tracking-tight sm:text-4xl">
+                Ətrafınızda problem görürsünüz?
+              </h2>
+              <p className="mx-auto mt-3 max-w-xl text-base text-blue-50">
+                Bir neçə dəqiqəyə bildirin ki, digər sakinlər də onu xəritədə
+                görsün.
+              </p>
+              <div className="mt-8 flex flex-wrap justify-center gap-3">
+                <Link
+                    href="/report"
+                    className="inline-flex h-11 items-center justify-center gap-2 rounded-xl bg-white px-5 text-base font-semibold text-blue-700 hover:bg-blue-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+                >
+                  <Plus aria-hidden className="h-4 w-4" strokeWidth={2.5} />
+                  Problemi bildir
+                </Link>
+                <Link
+                    href="/map"
+                    className="inline-flex h-11 items-center justify-center gap-2 rounded-xl border border-white/60 px-5 text-base font-semibold text-white hover:bg-white/10 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+                >
+                  Xəritəyə bax
+                  <ArrowRight aria-hidden className="h-4 w-4" />
+                </Link>
+              </div>
             </div>
           </div>
         </section>
