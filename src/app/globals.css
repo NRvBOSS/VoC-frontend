@@ -139,3 +139,36 @@
   transform-box: fill-box;
   transform-origin: center;
 }
+
+/* Leaflet düymələri saytın üslubuna uyğun */
+.leaflet-bar {
+  border: 1px solid #e3dfd3 !important;
+  border-radius: 12px !important;
+  box-shadow:
+          0 1px 2px rgb(15 27 45 / 0.06),
+          0 8px 20px -10px rgb(15 27 45 / 0.18) !important;
+  overflow: hidden;
+}
+.leaflet-bar a {
+  width: 38px !important;
+  height: 38px !important;
+  line-height: 38px !important;
+  color: #0f1b2d !important;
+}
+.leaflet-control-attribution {
+  font-size: 11px;
+  border-radius: 8px 0 0 0;
+}
+
+/* Detal kartı açıq olanda zoom və atribusiya kartın solunda qalsın */
+@media (min-width: 768px) {
+  .map-detail-open .leaflet-bottom.leaflet-right {
+    margin-right: 25.5rem;
+    transition: margin-right 0.2s;
+  }
+}
+@media (min-width: 768px) and (max-width: 1279px) {
+  .map-detail-open .map-legend {
+    display: none;
+  }
+}
